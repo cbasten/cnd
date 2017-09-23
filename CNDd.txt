@@ -1,0 +1,242 @@
+NAME
+    CNDd - Calculate Cytonuclear disequilibrium for diallelic systems
+
+SYNOPSIS
+    CNDd [ -i *data input* ] [ -o *data output* ] [ -e *log file* ] [ -t ] [
+    -S *i*] [ -a *alpha* ] [ -b *beta* ] ...
+
+DESCRIPTION
+    CNDd calculates cytonuclear disequilibria for diallelic systems. It also
+    calculates the minimum sample sizes required to detect arbitrary
+    disequilibria.
+
+OPTIONS
+    -o  Use this to specify the data output file. CNDd will append to a file
+        that already exists. The default value is CNDd.out.
+
+    -i  You need to specify a data input file with this option. The default
+        value is CNDd.dat. See the example files for the format.
+
+    -e  This allows you to name a log file. The default value is CNDd.err.
+
+    -t  Using this flag flips a switch to output data analysis in LaTeX2e
+        format.
+
+    -S  This flag requires an integer value. It is the *Sanchez* flag for
+        calculating exact sample sizes. A value of zero (the default) skips
+        calculating exact sample sizes. See below for more details.
+
+    -a  Use a real value with this flag to set the type I error probability,
+        otherwise known as the size or alpha, for calculating the exact
+        sample sizes. The default is 0.05.
+
+    -b  This allows you to set the type II error rate. One minus this value
+        is the power. The default is 0.5.
+
+    -pu This allows you to set an upper bound for the power when calculating
+        power curves.
+
+    -r1 Set rho1 with this option. It defaults to 0.5.
+
+    -r2 Set rho2 with this option. It defaults to 0.5.
+
+    -d1 Set D1 with this option and turn off usage of rho1 and rho2. It
+        defaults to 0.0 which means that rho1 and rho2 are used to calculate
+        D1 and D2 from the margins and a cubic equation. Note that if you
+        set this option, you should know what you are doing.
+
+    -d2 Set D2 with this option. It defaults to 0.0 and behaves like the
+        previous option.
+
+    -p1 Use this to set the marginal frequency of AA genotypes. It must be a
+        probability, or it will be reset to the default value of 0.1.
+
+    -p2 Use this to set the marginal frequency of Aa genotypes. It must be a
+        probability, or it will be reset to the default value of 0.1. In
+        addition, this and the previous probability must sum to a number
+        less than or equal to 1.0.
+
+    -pM Use this to set the marginal frequency of M cytotypes. It must be a
+        probability, or it will be reset to the default value of 0.1.
+
+    -Nl This allows you to set the lower bound on the sample size for use
+        with the -S flag. Powers based on the exact test will be calculated
+        beginning with this value, which defaults to 50. It must be a
+        positive integer, or it will be reset to 50.
+
+    -Nu This allows you to set the upper bound on the sample size for use
+        with the -S flag. Powers based on the exact test will be calculated
+        ending with this value, which defaults to 100. It must be an integer
+        greater than the setting for the previous option (-Nl), or it will
+        be rest to lower bound plus the increment.
+
+    -Ni This allows you to set the increment on the sample size for use with
+        the -S flag. Powers based on the exact test will be calculated from
+        the value set with -Nl up to the value -Nu incremented with this
+        value. It is 25 by default. It must be a positive integer, or it
+        will be reset to 25.
+
+    -T  Use this with care. It allows you to set the threshold for the
+        probability of a margin when calculating the exact test sample size
+        or power. A value of 0.0 would mean use all margins. For a value X,
+        it means that margins with maximum probability less than 10E-X will
+        be ignored. The default is 20, which means that margins with
+        probability less than 10E-20 will be ignored. See Sanchez *et al.,*
+        2004 for more details and don't use this unless you understand it.
+
+INPUT FORMAT
+    Your data file should contain cytonuclear counts for diallelic systems.
+    The input file is plain text with tokens followed by information that
+    the program will read. A token is any word that begins with a minus
+    sign.
+
+            -l 1
+            -b
+            -C    mtDNA
+            -N    Mdh-2 locus
+            -H    AA   Aa   aa
+            -M    25    0   97
+            -m    93  176    0
+            -e
+            -q  
+
+    -l  is followed by the number of sets of cytonuclear genotypes.
+
+    -C  specifies the cytoplasmic locus name.
+
+    -N  gives the nuclear locus name.
+
+    -H  is a header line for the allele names at the nuclear locus. Use it
+        as is.
+
+    -M  indicates that the M cytonuclear genotype counts follow in the order
+        nAAM, nAaM, naaM.
+
+    -m  indicates that the m cytonuclear genotypes counts follow in the
+        order nAAm, nAam, naam.
+
+    -p  is a flag to print out the data matrix.
+
+    -b  marks the beginning of a set of cytonuclear genotype counts.
+
+    -e  marks the end of a set of cytonuclear genotype counts.
+
+    -q  tells CNDd to stop reading and start computing.
+
+    You may repeat the block beginning with -b and ending with -e with new
+    sets of counts, but be sure to update the integer value after the -l
+    token, which should be the first token encountered. Note that this is a
+    minus ell (not minus one), and is necessary for the program to allocate
+    the proper amount of memory. If it is too small, the program will crash.
+
+SANCHEZ FLAG
+    CNDd can calculate the sample sizes required to detect the observed
+    disequilibria based on asymptotic theory or the exact test. The exact
+    test yields greater accuracy, but takes much more computing time. The
+    *Sanchez* flag allows control of this feature. The default is a value of
+    0, which means that the exact sample sizes are not calculated. Here are
+    the other values:
+
+    1.  The program will calculate the exact sample sizes required to detect
+        disequilibria for the data files.
+
+    2.  CNDd will ignore the data files and calculate a power curve for the
+        margins and rho values. The sample sizes will range from the
+        arguments to *-Nl* up to *-Nu* in increments of *-Ni*. You set the
+        margins with the *-p1* (for *P(AA)*), *-p2* (for *P(Aa*) and *-pM*
+        (for *P(M)*). The rho1 and rho2 parameters are set with *-r1* and
+        *-r2*. You can also set an upper bound on the power with *-pu*.
+
+    3.  Recalcuate Table 5 from Sanchez, *et al.,* 2004.
+
+    4.  Calculate the exact sample size for the margins and (rho1, rho2)
+        values given.
+
+    5.  Calculate the power curve based on the asymptotic test. See item 2
+        above for the parameters.
+
+EXAMPLES
+            % CNDd -i sample.dat   
+
+    Will analyze the data in sample.dat. Analysis follows Asmussen and
+    Basten (1994).
+
+            % CNDd -i sample.dat   -S 1
+
+    Same, except exact sample sizes are calculated for the data. You can
+    also do theoretical calculations.
+
+            % CNDd -p1 0.2 -p2 0.2 -pM 0.5 -r1 0.5 -r2 0.5 -S 4
+
+    will calculate the exact sample size needed to detect the disequilibria
+    that result when p(AA) = p(Aa) = 0.2, p(M) = 0.5, rho1 = rho2 = 0.5 and
+    the size and power are 0.05 and 0.5, respectively. See Sanchez *et al.,*
+    (2004) for details. For the parameter values given above, the values of
+    D1 and D2 would be -0.0455 and -0.0143. Thus,
+
+            % CNDd -p1 0.2 -p2 0.2 -pM 0.5 -d1 -0.0455 -d2 -0.0143 -S 4
+
+    would be equivalent.
+
+HINTS
+    The exact test can take quite a bit of time. If you have data, you might
+    want to run it without the exact test first. Look at the asymptotically
+    derived sample sizes required to detect the observed level of
+    disequilibria for DAAM, DAaM and DaaM. If the smallest one is reasonable
+    (say less than 500), try rerunning with the -S 1 flag. If you have a
+    Unix machine, you could compile the Unix version of this program and run
+    it in the background:
+
+            %  CNDd -i sample.dat -S 1 &
+
+    In 2004, we generated numerical results on a Macintosh G4 Xserve running
+    at 1.33 Mhz. The program code was compiled with gcc version 3.1 and
+    using the -O3 flag. The time in seconds to calculate the power for a
+    sample size N is approximately linear in N to the fifth power, with a
+    slope of 1/10^9. A rough estimate for the time to calculate the sample
+    size necessary for a specified power, would be about 5 *Na*^5/10^9,
+    where *Na* is the sample size calculated via asymptotic theory (Asmussen
+    and Basten, 1994), and the caret (^) means exponentiation.
+
+REFERENCES
+    1.  M.A. Asmussen and C.J. Basten (1994). Sampling theory for
+        cytonuclear disequilibria. *Genetics* 138:1351-1363.
+
+    2.  M.A. Asmussen and C.J. Basten (1996). Constraints and normalized
+        measures for cytonuclear disequilibria. *Heredity* 76:207-214.
+
+    3.  Sanchez, M.S., C.J. Basten, A.M. Ferrenberg, M.A. Asmussen and J.
+        Arnold (2004). Exact sample sizes needed to detect dependence in 2 x
+        3 tables. *Theoret. Pop. Biol.* submitted.
+
+SEE ALSO
+    CNDm(1)
+
+CONTACT INFO
+    In general, it is best to contact us via email.
+
+            Christopher J. Basten 
+            Bioinformatics Research Center, North Carolina State University
+            1523 Partners II Building/840 Main Campus Drive
+            Raleigh, NC 27695-7566     USA
+            Phone: (919)515-1934
+            basten@statgen.ncsu.edu
+    
+            Maria S. Sanchez
+            Department of Environmental Science, Policy and Management
+            University of California 
+            Berkeley, CA 94720   USA
+            msanchez@nature.berkeley.edu
+        
+    The BRC web site ( http://statgen.ncsu.edu/ ) has links to a software
+    page and from there to the newest version of this program (Cytonuclear
+    Disequilibria).
+
+    The direct link is here:
+    http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq
+
+    There are versions for Windows (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip ), Macintosh (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx ) and Unix (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz ).
+

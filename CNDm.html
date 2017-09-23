@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CNDm</title>
+<link rev="made" href="mailto:root@hampsten.nonet" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+<!--
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#options">OPTIONS</a></li>
+	<li><a href="#input_format">INPUT FORMAT</a></li>
+	<li><a href="#examples">EXAMPLES</a></li>
+	<li><a href="#references">REFERENCES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#contact_info">CONTACT INFO</a></li>
+</ul>
+-->
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CNDm - Calculate Cytonuclear disequilibrium for multi-allelic systems</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<p><strong>CNDm</strong> [ <strong>-i</strong> <em>data input</em> ]  [ <strong>-o</strong> <em>data output</em> ]  [ <strong>-e</strong> <em>log file</em> ] 
+[ <strong>-t</strong> ] [ <strong>-V</strong> ] [ <strong>-X</strong> ]   ...</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><strong>CNDm</strong> calculates cytonuclear disequilibria for multi-allelic systems.</p>
+<p>
+</p>
+<hr />
+<h1><a name="options">OPTIONS</a></h1>
+<dl>
+<dt><strong><a name="item__2do"><strong>-o</strong></a></strong><br />
+</dt>
+<dd>
+Use this to specify the data output file.  <strong>CNDm</strong> will append to a file
+that already exists.  The default value is <em>CNDm.out</em>.
+</dd>
+<p></p>
+<dt><strong><a name="item__2di"><strong>-i</strong></a></strong><br />
+</dt>
+<dd>
+You need to specify a data input file with this option.   The default value is <em>CNDm.dat</em>.
+See the example files for the format.
+</dd>
+<p></p>
+<dt><strong><a name="item__2de"><strong>-e</strong></a></strong><br />
+</dt>
+<dd>
+This allows you to name a log file.   The default value is <em>CNDm.err</em>.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dt"><strong>-t</strong></a></strong><br />
+</dt>
+<dd>
+Using this flag flips a switch to output data analysis in LaTeX2e format.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dx"><strong>-X</strong></a></strong><br />
+</dt>
+<dd>
+This flag flips a switch to stop the calculation of exact test p-values.
+It is a way to run a quick analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dv"><strong>-V</strong></a></strong><br />
+</dt>
+<dd>
+This is a switch to turn off a bunch of diagnostic messages.  The program will run
+quietly.   It is useful for running <strong>CNDm</strong> as a background job.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dr"><strong>-r</strong></a></strong><br />
+</dt>
+<dd>
+This option requires a positive integer and sets the number of repetitions (R) in 
+both the Monte Carlo and Markov chain analyses.   If none of the other options are
+set, then the B parameters will be set to 10 and the C parameters to R/10.  It is preferable
+to use the <strong>-rB</strong> and <strong>-rC</strong> options directly.  It is zero by default, which means that
+neither Monte Carlo nor Markov Chain analyses will  be performed.
+</dd>
+<p></p>
+<dt><strong><a name="item__2drb"><strong>-rB</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of batches of repetitions for both
+Monte Carlo and Markov Chain analyses.   The total number of repetitions is split into
+batches to estimate sampling variances.
+</dd>
+<p></p>
+<dt><strong><a name="item__2drc"><strong>-rC</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of repetitions within a batch for both
+Monte Carlo and Markov Chain analyses.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dm"><strong>-m</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of batches of repetitions for 
+the Markov Chain analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dmb"><strong>-mB</strong></a></strong><br />
+</dt>
+<dd>
+This sets the number of batches of repetitions forthe  Markov Chain analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dmc"><strong>-mC</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of repetitions within a batch for the
+Markov Chain analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dm"><strong>-M</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of batches of repetitions for 
+the Monte Carlo analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dmb"><strong>-MB</strong></a></strong><br />
+</dt>
+<dd>
+This sets the number of batches of repetitions forthe  Monte Carlo analysis.
+</dd>
+<p></p>
+<dt><strong><a name="item__2dmc"><strong>-MC</strong></a></strong><br />
+</dt>
+<dd>
+This requires a positive integer and sets the number of repetitions within a batch for the
+Monte Carlo analysis.
+</dd>
+<p></p></dl>
+<p>
+</p>
+<hr />
+<h1><a name="input_format">INPUT FORMAT</a></h1>
+<p>Your data file should contain cytonuclear counts for multi-allelic systems.
+The input file is plain text with tokens followed by information that
+the program will read.   A token is any word that begins with a minus
+sign.   Look at the file <em>CNDm.dat</em> as an example  of how to format the file.</p>
+<p>
+</p>
+<hr />
+<h1><a name="examples">EXAMPLES</a></h1>
+<pre>
+        % CNDm -i sample.dat</pre>
+<p>Will analyze the data in <em>sample.dat</em>.  Analysis follows Asmussen and Basten (1994) and
+Basten and Asmussen (1997).</p>
+<pre>
+        % CNDm -i sample.dat  -rB 100 -rC 1000</pre>
+<p>Will analyze the dat in <em>sample.dat</em> and do both Monte Carlo and Markov Chain based tests
+on the data (Basten and Asmussen, 1997).   There will be a total of 100,000 repetitions in each
+Monte Carlo and Markov Chain test, divided into 100 batches of 1,000 repetitions.   The program will
+calculate a p-value and standard error for that p-value for the hypothesis of cytonuclear 
+equilibrium.</p>
+<p>
+</p>
+<hr />
+<h1><a name="references">REFERENCES</a></h1>
+<ol>
+<li></li>
+M.A. Asmussen and C.J. Basten (1994).  Sampling theory for cytonuclear disequilibria.  
+<em>Genetics</em> <strong>138</strong>:1351-1363.
+<p></p>
+<li></li>
+M.A. Asmussen and C.J. Basten (1996).  Constraints and normalized measures for cytonuclear 
+disequilibria.  <em>Heredity</em> <strong>76</strong>:207-214.
+<p></p>
+<li></li>
+C.J. Basten and M.A. Asmussen (1997).  The exact test for cytonuclear disequilibria.  <em>Genetics</em> <strong>146</strong>:1165-1171.
+<p></p></ol>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><strong>CNDd(1)</strong></p>
+<p>
+</p>
+<hr />
+<h1><a name="contact_info">CONTACT INFO</a></h1>
+<p>In general, it is best to contact us via email.</p>
+<pre>
+        Christopher J. Basten 
+        Bioinformatics Research Center, North Carolina State University
+        1523 Partners II Building/840 Main Campus Drive
+        Raleigh, NC 27695-7566     USA
+        Phone: (919)515-1934
+        basten@statgen.ncsu.edu
+    
+        
+The BRC web site ( <a href="http://statgen.ncsu.edu/">http://statgen.ncsu.edu/</a> ) has links to a software page and from there to the 
+newest version of this program (Cytonuclear Disequilibria).</pre>
+<p>The direct link is here:  <a href="http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq">http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq</a></p>
+<p>There are versions for Windows ( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip">ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip</a> ), Macintosh
+( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx">ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx</a> ) and 
+Unix ( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz">ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz</a> ).</p>
+
+</body>
+
+</html>

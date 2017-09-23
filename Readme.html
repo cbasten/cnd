@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Readme</title>
+<link rev="made" href="mailto:root@hampsten.nonet" />
+</head>
+
+<body style="background-color: white">
+
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+<!--
+
+<ul>
+
+	<li><a href="#cnd_readme_11_september_2004">CND README 11 September 2004</a></li>
+	<li><a href="#cndd">CNDd</a></li>
+	<li><a href="#cndm">CNDm</a></li>
+	<li><a href="#platforms">PLATFORMS</a></li>
+	<ul>
+
+		<li><a href="#macintosh">Macintosh</a></li>
+		<li><a href="#unix">UNIX</a></li>
+		<li><a href="#mswindows">MS-Windows</a></li>
+	</ul>
+
+	<li><a href="#general_usage">GENERAL USAGE</a></li>
+	<li><a href="#references">REFERENCES</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#contact_info">CONTACT INFO</a></li>
+</ul>
+-->
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="cnd_readme_11_september_2004">CND README 11 September 2004</a></h1>
+<p>CND stands for CytoNuclear Disequilibria.  This package includes two 
+programs for calculating cytonuclear disequilibria from joint cytonuclear
+counts.  CNDd ( <a href="http://statgen.ncsu.edu/cnd/CNDd.php">http://statgen.ncsu.edu/cnd/CNDd.php</a> ) 
+will do it for diallelic data sets, and CNDm 
+( <a href="http://statgen.ncsu.edu/cnd/CNDm.php">http://statgen.ncsu.edu/cnd/CNDm.php</a> ) will do it
+for multiallelic data sets.   The package can be downloaded via
+ftp at <a href="ftp://statgen.ncsu.edu/pub/cnd">ftp://statgen.ncsu.edu/pub/cnd</a> .</p>
+<p>
+</p>
+<hr />
+<h1><a name="cndd">CNDd</a></h1>
+<p>This program calculates cytonuclear disequilibria for dilocus
+systems (Asmussen and Basten, 1996).  It takes as input one or more sets of joint cytonuclear
+counts and computes disequilibria, normalized disequilibria,
+variances, standard deviations, test statistics, asymptotic
+p values, p values based on Fisher's exact test and minimum sample
+sizes needed to detect the observed disequilibria with power 50% and
+90%.</p>
+<p>In 2004, Chris added code to calculate exact sample sizes for 2x3 tables (Sanchez, <em>et al.,</em> 2004).
+See the CNDd.html or the CNDd.txt file for details.</p>
+<p>
+</p>
+<hr />
+<h1><a name="cndm">CNDm</a></h1>
+<p>This  program  calculates disequilibrium
+statistics for cytonuclear data with multiple alleles 
+(Asmussen and Basten, 1996 and Basten and Asmussen, 1997).  It also does
+exact tests by collapsing the data into 2 by 2 tables for each nuclear
+genotype and cytotype, in turn.  Finally, it will do a Monte Carlo and
+a Markov simulation to get a probability that the entire data set is in
+equilibrium (as opposed to any pair of genotype/cytotypes).</p>
+<p>This program  doesn't check for Hardy-Weinberg
+disequilibria at the nuclear loci.</p>
+<p>
+</p>
+<hr />
+<h1><a name="platforms">PLATFORMS</a></h1>
+<p>
+</p>
+<h2><a name="macintosh">Macintosh</a></h2>
+<p>The Macintosh archive, <em>CNDMac.hqx</em>,  contains four programs:</p>
+<ol>
+<li></li>
+<strong>CNDm.classic</strong>, the multiallelic binary for non-carbonized Macs.
+<p></p>
+<li></li>
+<strong>CNDd.classic</strong>, the diallelic binary for non-carbonized Macs.
+<p></p>
+<li></li>
+<strong>CNDm.Carbon</strong>, the multiallelic binary for PowerPC Macs.  This should run
+under MacOSX and MacOS 9.
+<p></p>
+<li></li>
+<strong>CNDd.Carbon</strong>, the diallelic binary for PowerPC Macs, which should run under
+OS 9 or OS X.
+<p></p></ol>
+<p>Put the file <em>CNDMac.hqx</em> through <strong>Unstuffit</strong> to unpack the archive.  With Macintosh OSX and
+the development suite, you should consider downloading the UNIX version and compiling
+it.</p>
+<p>
+</p>
+<h2><a name="unix">UNIX</a></h2>
+<p>The UNIX distribution,  <em>CNDUnix.tar.gz</em>, is a compressed, tarred file of the source and documentation.
+Put  <em>CNDUnix.tar.gz</em>   in an appropriate place, 
+uncompress it, untar it, edit the <em>Makefile</em> to specify your compiler and bin directory.
+Once this is done, make the programs.  If I downloaded the files to my home directory
+(say <strong>/Users/basten</strong>), I might create a directory <em>CND</em> and do the following:</p>
+<pre>
+  %  mkdir CND
+  %  cp CNDUnix.tar.gz CND
+  %  cd CND
+  %  gunzip CNDUnix.tar.gz
+  %  tar xf CNDUnix.tar
+  %  vi Makefile
+  %  make install</pre>
+<p>When editing the Makefile with vi (or any text editor),  check the lines:</p>
+<pre>
+  CC=cc
+  BINDIR= ../bin
+  CFLAGS=</pre>
+<p>You might change them to</p>
+<pre>
+  CC=gcc
+  BINDIR= /usr/local/bin
+  CFLAGS= -O3</pre>
+<p>if you have <strong>gcc</strong>, want the binaries in <em>/usr/local/bin/</em> and want the code optimized.</p>
+<p>
+</p>
+<h2><a name="mswindows">MS-Windows</a></h2>
+<p>Download the <em>CNDWin.zip</em> file and unzip in an appropriate place.  To run the programs,
+open a command window, change directory to the <em>CNDWin\bin</em> directory and type the name
+of the program you want to run.  If you want to analyze data, then you need to put the
+data files in the <em>CNDWin\bin</em> directory.  For example, if you unzipped <em>CNDWin.zip</em> in 
+<em>C:\home</em>, and copied the file <em>hyla.dat</em> from <em>C:\home\CNDWin\dat</em> to <em>C:\home\CNDWin\bin</em>, 
+do this:</p>
+<pre>
+  c:\&gt;  cd c:\home\CNDWin\bin
+  c:\&gt;  CNDd -i hyla.dat</pre>
+<p>You can then look at the output file (<em>CNDd.out</em>) with any text editor.  It is best to
+use <strong>TextEdit</strong>, because <strong>Word</strong> can't help but mess up the file.</p>
+<p>
+</p>
+<hr />
+<h1><a name="general_usage">GENERAL USAGE</a></h1>
+<p>The files <em>CNDd.dat</em> and <em>CNDm.dat</em> are  sample data file and will indicate how to
+format your own data.  There are also three real data sets from bluegill, hyla
+tree frogs and eels.</p>
+<p>For both programs, you can get a summary of options but using them with the
+<strong>-h</strong> option.  For example, when you run <strong>CNDm</strong> with <strong>-h</strong>, (<strong>CNDm -h</strong>), you get:</p>
+<pre>
+  USAGE:
+  
+     CNDm [-i input] [-o output] [-e logfile] [-r Reps] [-M MonteReps] 
+      [-m MarkovReps] [-X ] [-V] [-t]
+  
+  DEFAULTS:
+  
+       [-o CNDm.out]
+       [-e CNDm.err]
+       [-i CNDm.dat]
+       [-r 0 ] [-rB 0 ] [-rC 0 ]
+       [-M 0 ] [-MB 0 ] [-MC 0 ]
+       [-m 0 ] [-mB 0 ] [-mC 0 ]
+       [-X ] Turns off exact test calculations.
+       [-V ] Turns off verbosity mode.
+  
+  Notes:
+      1. Setting Reps sets both MonteReps and MarkovReps to Reps.
+      2. rB is the number of batches, and sets MB and mB.
+      3. rC is the number of observations per batch, and sets MC and mC.
+      4. Reps, if positive, will be reset to rB * rC. These default to 10 and 100.
+      5. Markov and Monte B and C values are set similar to Reps.
+      6. If you are on a Mac or PC, you need to quit now.</pre>
+<p>If MonteReps equals 0, then a Monte Carlo shuffle test for the entire
+data set will not be run.  If it is greater than 0, then the test will
+be performed.  By default, it is 0 unless the -r or -M flags are used
+with a long integer value, indicating the number of shuffles to do.  
+To calculate the sample standard error of the statistic, the number of
+batches will be 10 by default.  You can set this with the -rB or -MB flag.</p>
+<p>If MarkovReps equals 0, then a Markov Chain Monte Carlo test for the
+entire data set will not be run.  If it is greater than 0, then it will
+be run. By default, it is 0 unless the -r or -m flags are used.
+To calculate the sample standard error of the statistic, the number of
+batches will be 10 by default.  You can set this with the -rB or -mB flag.</p>
+<p>If the -r flag is used, then both MarkovReps and MonteReps will be set
+to the number of reps indicated by the -r option.  Note that if a -M or
+-m option is typed on the command line AFTER the -r option, its value
+will take precedence.  The number of batches can be set with the -rB flag.
+The -rC flag sets the number of observations per batch.  The number of
+reps will be the product of these numbers if both are set.</p>
+<p>-X turns off the exact test for each cytonuclear genotype.  This is the
+opposite behavior as was the case prior to 24 July 1996.</p>
+<p>There is also a -V option which turns on the Verbosity mode.</p>
+<p>The -t option causes the program to output its results in LaTeX2e format.</p>
+<p>For Macintoshes, just click on the icon of choice.  In the console window, you
+can use the options to specify the input, output and error files.  You
+can also specify the number of reps as above.  In Windows, select the program
+in the File Manager and choose Run under the File menu.</p>
+<p>Do not type the square braces... they just indicate options.</p>
+<pre>
+  CNDm -o test.out -e test.err -i test.i -r 10000</pre>
+<p>would work.  It would set the number of reps for both the Markov and
+Monte Carlo approximations to 10,000.</p>
+<p>The <strong>-h</strong> flag with <strong>CNDd</strong> yields:</p>
+<pre>
+  USAGE:
+ 
+   CNDd [-o outfile] [-e errorfile] [-i inputfile] -t
+ 
+  DEFAULTS:
+ 
+         [-o CNDd.out]
+         [-e CNDd.err]
+         [-i CNDd.dat]
+         [-t ] Means output data analysis in LaTeX2e format 
+         [-a]  Set alpha = p(Type I error) for exact sample size (0.05)
+         [-b]  Set beta = p(Type II error) for same (0.5)
+         [-S ] Set the Sanchez flag for exact sample sizes [0,1,2,3,4,5]
+  -S with greater than 0 may require a long time. 
+  The following options are for theoretical calculations.
+         [-p1] Set p.1 (0.1)
+         [-p2] Set p.2 (0.1)
+         [-pM] Set p1. (0.1)
+         [-r1] Set rho1 (0.5)
+         [-r2] Set rho2 (0.5)
+         [-d1] Set D1 (0.0) and ignore rho1
+         [-d2] Set D2 (0.0) and ignore rho2
+         [-pu] Set upper bound for power in power curve
+         [-Nl] Set lower bound for sample size (50)
+         [-Nu] Set upper bound for sample size (100)
+         [-Ni] Set increment on sample size (25)
+ 
+        Note that -p1, -p2 and -pM require real valued arguments in (0,1)
+        with 0 &lt; p1+p2 &lt; 1.  -Nl, -Nu and -Ni set the lower bound, upper bound
+        and increment on the sample size.  -S with value &gt; 1 mean ignore data files.
+        The given values are the defaults.</pre>
+<p>Look at the html files in the doc folder for more information.</p>
+<p>
+</p>
+<hr />
+<h1><a name="references">REFERENCES</a></h1>
+<ol>
+<li></li>
+M.A. Asmussen and C.J. Basten (1994).  Sampling theory for cytonuclear disequilibria.  
+<em>Genetics</em> <strong>138</strong>:1351-1363.
+<p></p>
+<li></li>
+M.A. Asmussen and C.J. Basten (1996).  Constraints and normalized measures for cytonuclear 
+disequilibria.  <em>Heredity</em> <strong>76</strong>:207-214.
+<p></p>
+<li></li>
+C.J. Basten and M.A. Asmussen (1997).  The exact test for cytonuclear disequilibria.  <em>Genetics</em> <strong>146</strong>:1165-1171.
+<p></p>
+<li></li>
+Sanchez, M.S., C.J. Basten, A.M. Ferrenberg, M.A. Asmussen and J. Arnold (2004).
+Exact sample sizes needed to detect dependence in 2 x 3 tables.  <em>Theoret. Pop. Biol.</em>
+submitted.
+<p></p></ol>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p><strong>CNDd(1)</strong>, <strong>CNDm(1)</strong></p>
+<p>
+</p>
+<hr />
+<h1><a name="contact_info">CONTACT INFO</a></h1>
+<p>In general, it is best to contact us via email.</p>
+<pre>
+  Christopher J. Basten 
+  Bioinformatics Research Center, North Carolina State University
+  1523 Partners II Building/840 Main Campus Drive
+  Raleigh, NC 27695-7566     USA
+  Phone: (919)515-1934
+  basten@statgen.ncsu.edu</pre>
+<pre>
+  Maria S. Sanchez
+  Department of Environmental Science, Policy and Management
+  University of California 
+  Berkeley, CA 94720   USA
+  msanchez@nature.berkeley.edu</pre>
+<p>The BRC web site ( <a href="http://statgen.ncsu.edu/">http://statgen.ncsu.edu/</a> ) has links to a software page and from there to the 
+newest version of this program (Cytonuclear Disequilibria).</p>
+<p>The direct link is here:  <a href="http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq">http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq</a></p>
+<p>There are versions for Windows ( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip">ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip</a> ), Macintosh
+( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx">ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx</a> ) and 
+Unix ( <a href="ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz">ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz</a> ).</p>
+
+</body>
+
+</html>

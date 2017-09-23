@@ -1,0 +1,120 @@
+NAME
+    CNDm - Calculate Cytonuclear disequilibrium for multi-allelic systems
+
+SYNOPSIS
+    CNDm [ -i *data input* ] [ -o *data output* ] [ -e *log file* ] [ -t ] [
+    -V ] [ -X ] ...
+
+DESCRIPTION
+    CNDm calculates cytonuclear disequilibria for multi-allelic systems.
+
+OPTIONS
+    -o  Use this to specify the data output file. CNDm will append to a file
+        that already exists. The default value is CNDm.out.
+
+    -i  You need to specify a data input file with this option. The default
+        value is CNDm.dat. See the example files for the format.
+
+    -e  This allows you to name a log file. The default value is CNDm.err.
+
+    -t  Using this flag flips a switch to output data analysis in LaTeX2e
+        format.
+
+    -X  This flag flips a switch to stop the calculation of exact test
+        p-values. It is a way to run a quick analysis.
+
+    -V  This is a switch to turn off a bunch of diagnostic messages. The
+        program will run quietly. It is useful for running CNDm as a
+        background job.
+
+    -r  This option requires a positive integer and sets the number of
+        repetitions (R) in both the Monte Carlo and Markov chain analyses.
+        If none of the other options are set, then the B parameters will be
+        set to 10 and the C parameters to R/10. It is preferable to use the
+        -rB and -rC options directly. It is zero by default, which means
+        that neither Monte Carlo nor Markov Chain analyses will be
+        performed.
+
+    -rB This requires a positive integer and sets the number of batches of
+        repetitions for both Monte Carlo and Markov Chain analyses. The
+        total number of repetitions is split into batches to estimate
+        sampling variances.
+
+    -rC This requires a positive integer and sets the number of repetitions
+        within a batch for both Monte Carlo and Markov Chain analyses.
+
+    -m  This requires a positive integer and sets the number of batches of
+        repetitions for the Markov Chain analysis.
+
+    -mB This sets the number of batches of repetitions forthe Markov Chain
+        analysis.
+
+    -mC This requires a positive integer and sets the number of repetitions
+        within a batch for the Markov Chain analysis.
+
+    -M  This requires a positive integer and sets the number of batches of
+        repetitions for the Monte Carlo analysis.
+
+    -MB This sets the number of batches of repetitions forthe Monte Carlo
+        analysis.
+
+    -MC This requires a positive integer and sets the number of repetitions
+        within a batch for the Monte Carlo analysis.
+
+INPUT FORMAT
+    Your data file should contain cytonuclear counts for multi-allelic
+    systems. The input file is plain text with tokens followed by
+    information that the program will read. A token is any word that begins
+    with a minus sign. Look at the file CNDm.dat as an example of how to
+    format the file.
+
+EXAMPLES
+            % CNDm -i sample.dat   
+
+    Will analyze the data in sample.dat. Analysis follows Asmussen and
+    Basten (1994) and Basten and Asmussen (1997).
+
+            % CNDm -i sample.dat  -rB 100 -rC 1000
+
+    Will analyze the dat in sample.dat and do both Monte Carlo and Markov
+    Chain based tests on the data (Basten and Asmussen, 1997). There will be
+    a total of 100,000 repetitions in each Monte Carlo and Markov Chain
+    test, divided into 100 batches of 1,000 repetitions. The program will
+    calculate a p-value and standard error for that p-value for the
+    hypothesis of cytonuclear equilibrium.
+
+REFERENCES
+    1.  M.A. Asmussen and C.J. Basten (1994). Sampling theory for
+        cytonuclear disequilibria. *Genetics* 138:1351-1363.
+
+    2.  M.A. Asmussen and C.J. Basten (1996). Constraints and normalized
+        measures for cytonuclear disequilibria. *Heredity* 76:207-214.
+
+    3.  C.J. Basten and M.A. Asmussen (1997). The exact test for cytonuclear
+        disequilibria. *Genetics* 146:1165-1171.
+
+SEE ALSO
+    CNDd(1)
+
+CONTACT INFO
+    In general, it is best to contact us via email.
+
+            Christopher J. Basten 
+            Bioinformatics Research Center, North Carolina State University
+            1523 Partners II Building/840 Main Campus Drive
+            Raleigh, NC 27695-7566     USA
+            Phone: (919)515-1934
+            basten@statgen.ncsu.edu
+    
+    The BRC web site ( http://statgen.ncsu.edu/ ) has links to a software
+    page and from there to the newest version of this program (Cytonuclear
+    Disequilibria).
+
+    The direct link is here:
+    http://statgen.ncsu.edu/brcwebsite/software_BRC.php#Cytonuclear-diseq
+
+    There are versions for Windows (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDWin.zip ), Macintosh (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDMac.hqx ) and Unix (
+    ftp://statgen.ncsu.edu/pub/cnd/CNDUnix.tar.gz ).
+
